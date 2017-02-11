@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by ravik on 11/02/2017.
  */
-public class Population {
+public abstract class Population {
     private GAOperators operators;
     private NextGenSelector nextGenSelector;
     private List<Individual> population = new ArrayList<Individual>();
@@ -27,13 +27,6 @@ public class Population {
 
     public void setPopulation(List<Individual> population) {
         this.population = population;
-        Collections.sort(this.population, new Comparator<Individual>(){
-            public int compare(Individual o1, Individual o2){
-                if(o1.getFitness() == o2.getFitness())
-                    return 0;
-                return o1.getFitness() > o2.getFitness() ? -1 : 1;
-            }
-        });
     }
 
     public int getN() {
@@ -56,26 +49,5 @@ public class Population {
         return nextGenSelector.getNextGenPopulation(population, nextGen);
     }
 
-    public void printStatistics(){
-        Individual best = population.get(0);
-        Individual worst = population.get(0);
-        double mean = 0.0;
-        double totalFitness = 0.0;
-        for(Individual individual : population){
-            totalFitness = totalFitness + individual.getFitness();
-            if(individual.getFitness() > best.getFitness()){
-                best = individual;
-            }
-
-            if(individual.getFitness() < worst.getFitness()){
-                worst = individual;
-            }
-        }
-
-        mean = totalFitness/n;
-
-        System.out.println("The Best Individual has fitness :"+best.getFitness());
-        System.out.println("The Worst Individual has fitness :"+worst.getFitness());
-        System.out.println("The Average Fitness of population :"+mean);
-    }
+    public abstract void printStatistics();
 }

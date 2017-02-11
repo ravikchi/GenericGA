@@ -16,9 +16,11 @@ public class ElitistNextGen implements NextGenSelector {
         sortPopulation(parentGen);
         sortPopulation(childGen);
 
-        if(childGen.get(childGen.size()-1).getFitness() < parentGen.get(0).getFitness()){
+        if(childGen.get(0).getFitness() < parentGen.get(0).getFitness()){
             childGen.add(childGen.size()-1, parentGen.get(0));
         }
+
+        sortPopulation(childGen);
 
         return childGen;
     }

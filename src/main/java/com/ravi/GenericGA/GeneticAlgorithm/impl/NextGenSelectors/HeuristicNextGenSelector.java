@@ -37,6 +37,8 @@ public class HeuristicNextGenSelector implements NextGenSelector {
             }
         }
 
+        sortPopulation(newPopulation);
+
         return newPopulation;
     }
 

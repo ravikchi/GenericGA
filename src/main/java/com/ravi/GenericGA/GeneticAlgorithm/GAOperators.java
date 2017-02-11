@@ -37,26 +37,19 @@ public class GAOperators {
     public Individual produceChild(List<Individual> matingPool){
         double random = Math.random();
 
-        Individual parent1 = selectionOperator.selection(matingPool);
-        Individual parent2 = selectionOperator.selection(matingPool);
-
         Individual offSpring = null;
         if(random <= crossOverRate){
+            Individual parent1 = selectionOperator.selection(matingPool);
+            Individual parent2 = selectionOperator.selection(matingPool);
             offSpring = crossOverOperator.crossOver(parent1, parent2);
         }else if(random <= mutationRate+crossOverRate){
-            offSpring = mutationOperator.mutate(fitterParent(parent1, parent2));
+            Individual parent = selectionOperator.selection(matingPool);
+            offSpring = mutationOperator.mutate(parent);
         }else{
-            offSpring = fitterParent(parent1, parent2);
+            Individual parent = selectionOperator.selection(matingPool);
+            offSpring = parent;
         }
 
         return offSpring;
-    }
-
-    private Individual fitterParent(Individual parent1, Individual parent2){
-        if(parent1.getFitness() < parent2.getFitness()){
-            return parent2;
-        }else{
-            return parent1;
-        }
     }
 }
