@@ -16,4 +16,11 @@ public class RandomUtils {
         int range = (max - min) + 1;
         return (int)(Math.random() * range) + min;
     }
+
+    public static double randomInRange(int min, int max){
+        int diff = max - min;
+        double random = Math.random();
+
+        return random * diff + min;
+    }
 }
