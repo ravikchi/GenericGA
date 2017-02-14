@@ -7,6 +7,7 @@ import java.util.List;
  */
 public interface Individual {
     public double getFitness();
+    public double getFitness(Objective o);
     public String getChromosome();
     public List<Object> getPhenoType();
     public int geneSize();
